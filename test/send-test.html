@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PA Flow Test — Guest Application</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 720px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+        label { display: block; margin-top: 1rem; font-weight: 600; }
+        input, textarea, button {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 0.35rem;
+            padding: 0.6rem;
+            font: inherit;
+        }
+        textarea { min-height: 220px; font-family: ui-monospace, monospace; }
+        button {
+            width: auto;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            overflow: auto;
+        }
+        .hint { color: #555; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <h1>Power Automate — Flow Smoke Test</h1>
+    <p class="hint">
+        Nur zum Testen: „Kann der Flow Daten empfangen?“ Keine Security, keine Produktivlogik.
+        <code>website</code> ist der Honeypot und muss leer bleiben.
+    </p>
+
+    <label for="flowUrl">HTTP Trigger URL</label>
+    <input id="flowUrl" type="url" placeholder="https://prod-xx.westeurope.logic.azure.com/workflows/...">
+
+    <label for="payload">JSON Body</label>
+    <textarea id="payload"></textarea>
+
+    <button id="sendBtn" type="button">POST senden</button>
+
+    <h2>Antwort</h2>
+    <pre id="result">Noch nicht gesendet.</pre>
+
+    <script>
+        const defaultPayload = {
+            guestId: "test-001",
+            guestName: "Max Mustermann",
+            guestEmail: "max@example.com",
+            guestCompany: "Cyber Group",
+            guestRole: "Marketing Lead",
+            guestBio: "Podcast Gast zum Thema AI & Automation",
+            guestStory: "Wie Unternehmen operative Prozesse automatisieren können",
+            guestFit: "Sehr guter Fit für Business Automation Themen",
+            website: "",
+            submittedAt: new Date().toISOString()
+        };
+
+        const payloadField = document.getElementById("payload");
+        payloadField.value = JSON.stringify(defaultPayload, null, 2);
+
+        document.getElementById("sendBtn").addEventListener("click", async () => {
+            const result = document.getElementById("result");
+            const flowUrl = document.getElementById("flowUrl").value.trim();
+
+            if (!flowUrl) {
+                result.textContent = "Fehler: HTTP Trigger URL fehlt.";
+                return;
+            }
+
+            let payload;
+            try {
+                payload = JSON.parse(payloadField.value);
+            } catch (error) {
+                result.textContent = "Fehler: JSON ist ungültig.\n" + error.message;
+                return;
+            }
+
+            result.textContent = "Sende…";
+
+            try {
+                const response = await fetch(flowUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const text = await response.text();
+                result.textContent =
+                    "Status: " + response.status + " " + response.statusText + "\n\n" +
+                    (text || "(leerer Body)");
+            } catch (error) {
+                result.textContent =
+                    "Request fehlgeschlagen.\n\n" +
+                    error.message + "\n\n" +
+                    "Hinweis: CORS blockiert Browser-Requests oft direkt gegen den Flow. " +
+                    "Dann Postman oder send-test.ps1 nutzen.";
+            }
+        });
+    </script>
+</body>
+</html>

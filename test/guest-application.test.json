@@ -1,0 +1,12 @@
+{
+  "guestId": "test-001",
+  "guestName": "Max Mustermann",
+  "guestEmail": "max@example.com",
+  "guestCompany": "Cyber Group",
+  "guestRole": "Marketing Lead",
+  "guestBio": "Podcast Gast zum Thema AI & Automation",
+  "guestStory": "Wie Unternehmen operative Prozesse automatisieren können",
+  "guestFit": "Sehr guter Fit für Business Automation Themen",
+  "website": "",
+  "submittedAt": "2026-05-26T14:00:00Z"
+}
