@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branded Wor(l)ds – Where Branding, Culture & Business Collide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a2540;
+            --cyan: #00d9ff;
+            --white: #ffffff;
+            --gray: #8a9ba8;
+            --dark-navy: #051627;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark-navy);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 37, 64, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            gap: 1rem;
+        }
+
+        .logo-nav {
+            height: clamp(30px, 4vw, 50px);
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        nav ul {
+            display: flex;
+            gap: clamp(0.8rem, 2.5vw, 3rem);
+            list-style: none;
+            flex-wrap: nowrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: clamp(0.75rem, 1.4vw, 1rem);
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('hintergrund.jpg') center center / cover no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 37, 64, 0.9) 0%, rgba(5, 22, 39, 0.95) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            max-width: 700px;
+            width: 90%;
+            height: auto;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease-out;
+            filter: drop-shadow(0 10px 30px rgba(0, 217, 255, 0.3));
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--cyan);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 .highlight {
+            color: var(--cyan);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: var(--gray);
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Featured Badge */
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 217, 255, 0.15);
+            border: 1px solid var(--cyan);
+            padding: 1rem 2rem;
+            margin-top: 3rem;
+            animation: fadeInUp 0.8s ease-out 1s backwards;
+            backdrop-filter: blur(10px);
+        }
+
+        .featured-badge::before {
+            content: '★';
+            color: var(--cyan);
+            font-size: 1.5rem;
+        }
+
+        .featured-text {
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        /* Hosts Section */
+        .hosts-section {
+            padding: 8rem 5%;
+            background: var(--navy);
+            position: relative;
+        }
+
+        .hosts-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            color: var(--cyan);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .hosts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .host-card {
+            background: var(--dark-navy);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 3rem;
+            position: relative;
+            overflow: visible;
+            transition: all 0.4s ease;
+        }
+
+        .host-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .host-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .host-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.2);
+        }
+
+        .host-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--cyan);
+            margin-bottom: 2rem;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .host-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        .host-title {
+            color: var(--cyan);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .host-bio {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .host-quote {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-style: italic;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 8rem 5%;
+            background: var(--dark-navy);
+            text-align: center;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 4rem auto 0;
+        }
+
+        .proof-item {
+            padding: 2rem;
+            background: var(--navy);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .proof-item:hover {
+            border-color: var(--cyan);
+            transform: translateY(-5px);
+        }
+
+        .proof-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .proof-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        /* Latest Episode */
+        .latest-episode {
+            padding: 8rem 5%;
+            background: var(--navy);
+        }
+
+        .episode-container {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            background: var(--dark-navy);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .episode-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .episode-content {
+            padding: 4rem;
+        }
+
+        .episode-number {
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .episode-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .player-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--dark-navy);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .player-container iframe {
+            display: block;
+            width: 100%;
+            height: 550px;
+            background: var(--dark-navy);
+            border: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .player-container {
+                margin: 0 5%;
+            }
+            
+            .player-container iframe {
+                height: 450px;
+            }
+        }
+
+        .episode-description {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .episode-meta {
+            color: var(--cyan);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Episodes List */
+        .episodes-list {
+            padding: 8rem 5%;
+            background: var(--dark-navy);
+        }
+
+        .episodes-grid {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .episode-card {
+            background: var(--navy);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 150px 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .episode-card:hover {
+            border-color: var(--cyan);
+            transform: translateX(10px);
+        }
+
+        .episode-card-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid var(--cyan);
+        }
+
+        .episode-card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-card-date {
+            color: var(--cyan);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-card-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Guest Application */
+        .guest-application {
+            padding: 8rem 5%;
+            background: var(--navy);
+            position: relative;
+        }
+
+        .guest-application::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+        }
+
+        .application-container {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            background: var(--dark-navy);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 4rem;
+        }
+
+        .requirements-list {
+            margin: 3rem 0;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--navy);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .requirement-item:hover {
+            border-color: var(--cyan);
+        }
+
+        .requirement-checkbox {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--cyan);
+            background: transparent;
+            cursor: pointer;
+            margin-top: 0.2rem;
+        }
+
+        .requirement-checkbox:checked {
+            background: var(--cyan);
+            position: relative;
+        }
+
+        .requirement-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .requirement-content h4 {
+            color: var(--cyan);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .requirement-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .application-form {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .form-note {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid var(--cyan);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .form-note strong {
+            color: var(--cyan);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 8rem 5%;
+            background: var(--dark-navy);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            background: var(--dark-navy);
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 3%;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            .hero-logo {
+                max-width: 90%;
+            }
+            
+            .host-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .host-name {
+                font-size: 1rem;
+                line-height: 1.3;
+            }
+            
+            .host-title {
+                font-size: 0.9rem;
+            }
+            
+            .episode-title {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            
+            .episode-description {
+                font-size: 0.95rem;
+            }
+
+            .hosts-grid,
+            .episode-container {
+                grid-template-columns: 1fr;
+            }
+
+            .episode-card {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .application-container {
+                padding: 2rem;
+            }
+
+            .requirement-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <img src="logo-1.png" alt="Branded Wor(l)ds Logo" class="logo-nav">
+        <ul>
+            <li><a href="#hosts">Hosts</a></li>
+            <li><a href="#latest-episode">Latest</a></li>
+            <li><a href="#episodes">Episodes</a></li>
+            <li><a href="#apply">Be a Guest</a></li>
+            <li><a href="#subscribe">Subscribe</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo-1.png" alt="Branded Wor(l)ds Logo" class="hero-logo">
+            <div class="hero-tagline">A Transatlantic Dialogue</div>
+            <h1>
+                Where <span class="highlight">branding</span>, culture<br>
+                & business <span class="highlight">collide</span>
+            </h1>
+            <p class="hero-subtitle">
+                Not another marketing podcast. A global conversation about brands that actually matter—
+                featuring the people behind the world's most influential companies.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://open.spotify.com/show/7MyGTNCGmjhxWYfIgLlp3R" class="btn btn-primary" target="_blank">Listen on Spotify</a>
+                <a href="https://podcasts.apple.com/de/podcast/branded-wor-l-ds/id1816583788" class="btn btn-secondary" target="_blank">Listen on Apple</a>
+            </div>
+            <div class="featured-badge">
+                <span class="featured-text">FEATURED AT OMR · TRANSATLANTIC VOICES · GLOBAL IMPACT</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosts Section -->
+    <section class="hosts-section" id="hosts">
+        <div class="section-header">
+            <div class="section-label">The Minds Behind The Show</div>
+            <h2 class="section-title">People Follow People</h2>
+            <p class="section-subtitle">
+                Two continents. Two perspectives. One mission: to uncover how brands navigate 
+                culture, sustainability, and the future of business.
+            </p>
+        </div>
+        <div class="hosts-grid">
+            <div class="host-card">
+                <img src="Steven.png" alt="Steven Baumgaertner" class="host-image">
+                <h3 class="host-name">Steven Baumgaertner</h3>
+                <div class="host-title">Brand Builder · Entrepreneur · Europe</div>
+                <p class="host-bio">
+                    CEO of Cybergroup International and the creative force behind The Hapticologist. 
+                    Steven bridges the gap between multisensory branding and sustainable business practices. 
+                    With decades shaping brand experiences across Europe, he brings deep industry knowledge 
+                    and a forward-thinking approach to every conversation.
+                </p>
+                <div class="host-quote">
+                    "Brands aren't built through words alone—they're felt through every touchpoint."
+                </div>
+            </div>
+            <div class="host-card">
+                <img src="jeff.png" alt="Jeff Solomon" class="host-image">
+                <h3 class="host-name">Jeff Solomon</h3>
+                <div class="host-title">Industry Pioneer · Thought Leader · USA</div>
+                <p class="host-bio">
+                    Co-Founder of the Branded Merch Network and a leading voice in the promotional products 
+                    industry. Jeff connects brands with purpose, championing innovation and authenticity 
+                    from Los Angeles. His expertise spans strategic partnerships, cultural trends, and 
+                    the evolution of brand storytelling in America.
+                </p>
+                <div class="host-quote">
+                    "The best brands don't just sell—they start movements."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="section-header">
+            <div class="section-label">Credibility That Speaks</div>
+            <h2 class="section-title">Trusted by Global Leaders</h2>
+        </div>
+        <div class="proof-grid">
+            <div class="proof-item">
+                <div class="proof-number" id="episode-count">24+</div>
+                <div class="proof-label">Episodes & Counting</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-number">OMR</div>
+                <div class="proof-label">Featured Platform</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-number">2</div>
+                <div class="proof-label">Continents Connected</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-number">Global</div>
+                <div class="proof-label">Industry Reach</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Episode mit Podcaster.de Player -->
+    <section class="latest-episode" id="latest-episode">
+        <div class="section-header">
+            <div class="section-label">Now Playing</div>
+            <h2 class="section-title">Latest Episode</h2>
+            <p class="section-subtitle">
+                Listen to our newest conversation directly here. Always up-to-date with the latest episode.
+            </p>
+        </div>
+        <div class="player-container">
+            <iframe 
+                src="https://player.pdcstrcdn.de?p=a07d8d73-9b3d-43b6-96a4-0fb046e8c0c2&v=1778863013" 
+                width="100%" 
+                height="450px" 
+                style="border:0;overflow:hidden;border-radius:8px;"
+                title="Branded Wor(l)ds Podcast Player">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- All Episodes -->
+    <section class="episodes-list" id="episodes">
+        <div class="section-header">
+            <div class="section-label">Previous Conversations</div>
+            <h2 class="section-title">All Episodes</h2>
+        </div>
+        <div id="episodes-list-content" class="loading">Loading episodes...</div>
+    </section>
+
+    <!-- Guest Application -->
+    <section class="guest-application" id="apply">
+        <div class="section-header">
+            <div class="section-label">Join the Conversation</div>
+            <h2 class="section-title">Become a Guest</h2>
+            <p class="section-subtitle">
+                We're looking for leaders with stories that matter. If you fit the criteria below, 
+                we'd love to hear from you.
+            </p>
+        </div>
+        
+        <div class="application-container">
+            <div class="requirements-list">
+                <div class="requirement-item">
+                    <input type="checkbox" id="req1" class="requirement-checkbox">
+                    <div class="requirement-content">
+                        <h4>Transglobal Relevance</h4>
+                        <p>Your story, expertise, or brand has international reach and resonates across borders. We're looking for guests who bring perspectives that transcend local markets.</p>
+                    </div>
+                </div>
+
+                <div class="requirement-item">
+                    <input type="checkbox" id="req2" class="requirement-checkbox">
+                    <div class="requirement-content">
+                        <h4>Industry Relevance</h4>
+                        <p>You work in merchandising, promotional products, branding, advertising, or the global marketing industry. Your insights contribute to the evolution of how brands connect with people.</p>
+                    </div>
+                </div>
+
+                <div class="requirement-item">
+                    <input type="checkbox" id="req3" class="requirement-checkbox">
+                    <div class="requirement-content">
+                        <h4>English Proficiency</h4>
+                        <p>You can communicate fluently in English as a second language. Our conversations are in English to reach a global audience.</p>
+                    </div>
+                </div>
+
+                <div class="requirement-item">
+                    <input type="checkbox" id="req4" class="requirement-checkbox">
+                    <div class="requirement-content">
+                        <h4>A Story Worth Telling</h4>
+                        <p>You have a compelling narrative—whether it's building a brand from scratch, navigating cultural challenges, pioneering sustainability, or driving meaningful change in your industry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="application-form">
+                <div class="form-note">
+                    <strong>Ready to apply?</strong> Once you've confirmed all four requirements above, 
+                    click the button below to send us your application. We'll review it and get back to you 
+                    with next steps.
+                </div>
+                
+                <button id="applyBtn" class="btn btn-primary" disabled style="width: 100%; font-size: 1.2rem; padding: 1.5rem;">
+                    Submit Application
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="subscribe">
+        <div class="section-header">
+            <div class="section-label">Stay Connected</div>
+            <h2 class="section-title">Never Miss an Episode</h2>
+            <p class="section-subtitle">
+                Subscribe on your favorite platform and get notified when new episodes drop.
+            </p>
+        </div>
+        <div class="cta-buttons">
+            <a href="https://open.spotify.com/show/7MyGTNCGmjhxWYfIgLlp3R" class="btn btn-primary" target="_blank">Spotify</a>
+            <a href="https://podcasts.apple.com/de/podcast/branded-wor-l-ds/id1816583788" class="btn btn-secondary" target="_blank">Apple Podcasts</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/company/branded-wor-l-ds/" target="_blank">LinkedIn</a>
+            <a href="https://open.spotify.com/show/7MyGTNCGmjhxWYfIgLlp3R" target="_blank">Spotify</a>
+            <a href="https://podcasts.apple.com/de/podcast/branded-wor-l-ds/id1816583788" target="_blank">Apple Podcasts</a>
+            <a href="mailto:sb@mycybergroup.com">Contact</a>
+        </div>
+        <p>© 2025 Branded Wor(l)ds · A Transatlantic Dialogue</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://www.mycybergroup.com/en/imprint/" style="color: var(--gray);">Imprint</a> · 
+            <a href="https://www.mycybergroup.com/en/privacy-policy/" style="color: var(--gray);">Privacy Policy</a>
+        </p>
+    </footer>
+
+    <script>
+        // RSS Feed URL
+        const RSS_FEED_URL = 'https://feeds.podcaster.de/branded-worlds/feed.xml';
+
+        // Fetch and parse RSS feed (für All Episodes Liste + Episode Count)
+        async function loadPodcastFeed() {
+            try {
+                // Cache-Buster: Add timestamp to force fresh data
+                const cacheBuster = new Date().getTime();
+                const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_FEED_URL)}&_=${cacheBuster}`);
+                const data = await response.json();
+                
+                if (data.status === 'ok' && data.items && data.items.length > 0) {
+                    // Latest Episode wird jetzt vom Podcaster.de Player automatisch geladen!
+                    displayAllEpisodes(data.items);
+                    updateEpisodeCount(data.items.length);
+                } else {
+                    showFallbackContent();
+                }
+            } catch (error) {
+                console.error('Error loading podcast feed:', error);
+                showFallbackContent();
+            }
+        }
+
+        // Display latest episode
+        function displayLatestEpisode(episode) {
+            const container = document.getElementById('latest-episode-content');
+            const episodeNumber = getEpisodeNumber(episode.title);
+            const image = episode.enclosure?.link || episode.thumbnail || 'cover_youtube_branded_wor_l_ds.jpg';
+            
+            container.innerHTML = `
+                <div class="episode-container">
+                    <img src="${image}" alt="${episode.title}" class="episode-image" onerror="this.src='cover_youtube_branded_wor_l_ds.jpg'">
+                    <div class="episode-content">
+                        <div class="episode-number">${episodeNumber}</div>
+                        <h3 class="episode-title">${cleanTitle(episode.title)}</h3>
+                        <div class="episode-meta">${formatDate(episode.pubDate)}</div>
+                        <p class="episode-description">${stripHTML(episode.description || episode.content).substring(0, 300)}...</p>
+                        <a href="${episode.link}" class="btn btn-primary" target="_blank">Listen Now</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Display all episodes
+        function displayAllEpisodes(episodes) {
+            const container = document.getElementById('episodes-list-content');
+            const episodesHTML = episodes.map(episode => {
+                const image = episode.enclosure?.link || episode.thumbnail || 'cover_youtube_branded_wor_l_ds.jpg';
+                return `
+                    <div class="episode-card">
+                        <img src="${image}" alt="${episode.title}" class="episode-card-image" onerror="this.src='cover_youtube_branded_wor_l_ds.jpg'">
+                        <div class="episode-card-content">
+                            <h3>${cleanTitle(episode.title)}</h3>
+                            <div class="episode-card-date">${formatDate(episode.pubDate)}</div>
+                            <p class="episode-card-desc">${stripHTML(episode.description || episode.content).substring(0, 150)}...</p>
+                        </div>
+                        <a href="${episode.link}" class="btn btn-primary" target="_blank">Listen</a>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = `<div class="episodes-grid">${episodesHTML}</div>`;
+        }
+
+        // Update episode count
+        function updateEpisodeCount(count) {
+            const countElement = document.getElementById('episode-count');
+            if (countElement) {
+                countElement.textContent = count + '+';
+            }
+        }
+
+        // Helper: Extract episode number from title
+        function getEpisodeNumber(title) {
+            const match = title.match(/\b(\d+)\b/);
+            return match ? `EPISODE ${match[1]}` : 'LATEST EPISODE';
+        }
+
+        // Helper: Clean title (remove episode numbers)
+        function cleanTitle(title) {
+            return title.replace(/^(Episode\s*\d+\s*[-:]?\s*)/i, '').trim();
+        }
+
+        // Helper: Strip HTML tags
+        function stripHTML(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        // Helper: Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // Fallback content if RSS fails
+        function showFallbackContent() {
+            // Latest Episode wird vom Podcaster.de Player automatisch geladen
+            // Hier nur Fallback für "All Episodes" Liste
+            const episodesContainer = document.getElementById('episodes-list-content');
+            if (episodesContainer) {
+                episodesContainer.innerHTML = `
+                    <div class="episodes-grid">
+                        <div class="episode-card">
+                            <img src="cover_youtube_branded_wor_l_ds.jpg" alt="Episode" class="episode-card-image">
+                            <div class="episode-card-content">
+                                <h3>Listen on Your Favorite Platform</h3>
+                                <div class="episode-card-date">All Episodes Available</div>
+                                <p class="episode-card-desc">Listen to all episodes of Branded Wor(l)ds on Spotify, Apple Podcasts, or directly here.</p>
+                            </div>
+                            <a href="https://open.spotify.com/show/7MyGTNCGmjhxWYfIgLlp3R" class="btn btn-primary" target="_blank">Listen on Spotify</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Guest Application Logic
+        const checkboxes = document.querySelectorAll('.requirement-checkbox');
+        const applyBtn = document.getElementById('applyBtn');
+
+        function updateApplyButton() {
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            applyBtn.disabled = !allChecked;
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', updateApplyButton);
+        });
+
+        applyBtn.addEventListener('click', function() {
+            if (!this.disabled) {
+                // Simple mailto with pre-filled template
+                const subject = 'Branded Wor(l)ds Guest Application';
+                const body = `Hi Steven and Jeff,
+
+I would like to apply to be a guest on Branded Wor(l)ds.
+
+I confirm that I meet all four requirements:
+✓ Transglobal Relevance
+✓ Industry Relevance (Merch, Branding, Advertising)
+✓ English Proficiency
+✓ A Story Worth Telling
+
+MY NAME:
+[Your Full Name]
+
+MY COMPANY:
+[Your Company]
+
+MY BIO:
+[Please write a brief bio about yourself]
+
+MY STORY:
+[Please describe the story you'd like to share on the podcast]
+
+WHY I'M A GOOD FIT:
+[Please explain why you'd be a great guest for Branded Wor(l)ds]
+
+MY CONTACT:
+Email: [Your Email]
+Phone: [Your Phone]
+LinkedIn: [Your LinkedIn]
+
+Looking forward to hearing from you!
+
+Best regards`;
+                
+                window.location.href = `mailto:sb@mycybergroup.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.host-card, .proof-item, .requirement-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Load podcast feed on page load
+        loadPodcastFeed();
+    </script>
+</body>
+</html>
