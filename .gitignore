@@ -1,3 +1,10 @@
 *.zip
 _extract_newest/
 _live_index.html
+_calendly.html
+_git_head.html
+_git_raw.html
+_live.html
+.env
+.env.local
+test/flow.config.local.json

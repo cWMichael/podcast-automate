@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Branded Wor(l)ds Guest Application",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "guestId",
+    "guestName",
+    "guestEmail",
+    "guestCompany",
+    "guestRole",
+    "guestBio",
+    "guestStory",
+    "guestFit",
+    "website",
+    "submittedAt"
+  ],
+  "properties": {
+    "guestId": {
+      "type": "string",
+      "description": "Client-generated ID, e.g. test-001 or uuid"
+    },
+    "guestName": { "type": "string" },
+    "guestEmail": { "type": "string", "format": "email" },
+    "guestCompany": { "type": "string" },
+    "guestRole": { "type": "string" },
+    "guestBio": { "type": "string" },
+    "guestStory": { "type": "string" },
+    "guestFit": { "type": "string" },
+    "website": {
+      "type": "string",
+      "description": "Honeypot. Must stay empty for real submissions."
+    },
+    "submittedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

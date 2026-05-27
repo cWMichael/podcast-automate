@@ -37,12 +37,16 @@
 <body>
     <h1>Power Automate — Flow Smoke Test</h1>
     <p class="hint">
-        Nur zum Testen: „Kann der Flow Daten empfangen?“ Keine Security, keine Produktivlogik.
+        Nur zum manuellen Browser-Test. Für den regulären Test bitte
+        <code>test/send-test.ps1</code> nutzen — lädt URL und Token aus <code>.env.local</code>.
         <code>website</code> ist der Honeypot und muss leer bleiben.
     </p>
 
     <label for="flowUrl">HTTP Trigger URL</label>
-    <input id="flowUrl" type="url" placeholder="https://prod-xx.westeurope.logic.azure.com/workflows/...">
+    <input id="flowUrl" type="url" placeholder="https://...logic.azure.com/...">
+
+    <label for="apiToken">x-api-token</label>
+    <input id="apiToken" type="password" placeholder="Secret token from Andreas">
 
     <label for="payload">JSON Body</label>
     <textarea id="payload"></textarea>
@@ -72,9 +76,15 @@
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const result = document.getElementById("result");
             const flowUrl = document.getElementById("flowUrl").value.trim();
+            const apiToken = document.getElementById("apiToken").value.trim();
 
             if (!flowUrl) {
                 result.textContent = "Fehler: HTTP Trigger URL fehlt.";
+                return;
+            }
+
+            if (!apiToken) {
+                result.textContent = "Fehler: x-api-token fehlt.";
                 return;
             }
 
@@ -92,7 +102,8 @@
                 const response = await fetch(flowUrl, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "x-api-token": apiToken
                     },
                     body: JSON.stringify(payload)
                 });

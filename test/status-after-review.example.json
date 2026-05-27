@@ -1,0 +1,7 @@
+{
+  "guestId": "test-approval-001",
+  "status": "needs_more_info",
+  "reviewedAt": "2026-05-27T15:30:00Z",
+  "reviewedBy": "steven@example.com",
+  "rejectionReason": null
+}
