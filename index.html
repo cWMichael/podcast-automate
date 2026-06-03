@@ -637,6 +637,48 @@
             color: var(--cyan);
         }
 
+        .booking-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .booking-label {
+            color: var(--cyan);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .booking-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendly-container {
+            background: var(--dark-navy);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 700px;
+        }
+
+        .calendly-inline-widget {
+            min-width: 320px;
+            height: 700px;
+        }
+
+        @media (max-width: 768px) {
+            .calendly-container,
+            .calendly-inline-widget {
+                min-height: 650px;
+                height: 650px;
+            }
+        }
+
         /* Newsletter */
         .newsletter {
             padding: 8rem 5%;
@@ -678,6 +720,25 @@
         }
 
         /* Responsive */
+        @media (max-width: 1100px) {
+            nav {
+                padding: 1.2rem 3%;
+                gap: 0.5rem;
+            }
+
+            nav ul {
+                gap: clamp(0.5rem, 1.5vw, 1.5rem);
+            }
+
+            nav a {
+                font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+            }
+
+            .logo-nav {
+                height: clamp(25px, 3vw, 40px);
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 3%;
@@ -928,6 +989,22 @@
                     Submit Application
                 </button>
             </div>
+
+            <div class="booking-section" id="book">
+                <div class="booking-label">Step 2 · After Approval</div>
+                <h3 class="booking-title">Book Your Recording Slot</h3>
+                <div class="form-note">
+                    <strong>Already approved as a guest?</strong> Pick your date and time below. 
+                    If you haven't applied yet, complete the requirements above first — we review every application before booking opens.
+                </div>
+                <div class="calendly-container">
+                    <div
+                        class="calendly-inline-widget"
+                        data-url="https://calendly.com/s-baumgaertner-cwmail/branded-wor-l-ds-podcast"
+                        style="min-width:320px;height:700px;">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -960,6 +1037,8 @@
             <a href="https://www.mycybergroup.com/en/privacy-policy/" style="color: var(--gray);">Privacy Policy</a>
         </p>
     </footer>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
     <script>
         // RSS Feed URL

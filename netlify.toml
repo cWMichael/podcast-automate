@@ -1,0 +1,10 @@
+[build]
+  functions = "netlify/functions"
+
+# Proxy: POST /api/apply → Netlify Function
+[[redirects]]
+  from   = "/api/apply"
+  to     = "/.netlify/functions/submit-application"
+  status = 200
+  force  = true
+  conditions = {Method = ["POST"]}
