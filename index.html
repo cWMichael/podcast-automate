@@ -637,6 +637,101 @@
             color: var(--cyan);
         }
 
+        .guest-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            padding: 0.85rem 1rem;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--cyan);
+            background: rgba(0, 217, 255, 0.05);
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(138, 155, 168, 0.6);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group.honeypot {
+            display: none;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-status {
+            display: none;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .form-status.success {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid var(--cyan);
+            color: var(--white);
+        }
+
+        .form-status.error {
+            background: rgba(255, 80, 80, 0.1);
+            border-left: 4px solid #ff5050;
+            color: #ff9090;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .booking-section {
             margin-top: 3rem;
             padding-top: 3rem;
@@ -980,14 +1075,55 @@
 
             <div class="application-form">
                 <div class="form-note">
-                    <strong>Ready to apply?</strong> Once you've confirmed all four requirements above, 
-                    click the button below to send us your application. We'll review it and get back to you 
-                    with next steps.
+                    <strong>Ready to apply?</strong> Fill in the form below. We review every application and get back to you personally.
                 </div>
-                
-                <button id="applyBtn" class="btn btn-primary" disabled style="width: 100%; font-size: 1.2rem; padding: 1.5rem;">
-                    Submit Application
-                </button>
+
+                <form id="guestForm" class="guest-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guestName">Full Name *</label>
+                            <input type="text" id="guestName" name="guestName" placeholder="Jane Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestEmail">Email Address *</label>
+                            <input type="email" id="guestEmail" name="guestEmail" placeholder="jane@company.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="guestCompany">Company *</label>
+                            <input type="text" id="guestCompany" name="guestCompany" placeholder="Your Company" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestRole">Your Role *</label>
+                            <input type="text" id="guestRole" name="guestRole" placeholder="CEO, Founder, Director …" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestBio">Short Bio *</label>
+                        <textarea id="guestBio" name="guestBio" placeholder="Tell us who you are in 2–3 sentences." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestStory">Your Story / Topic *</label>
+                        <textarea id="guestStory" name="guestStory" placeholder="What would you like to talk about? What's the story you want to share?" required style="min-height:120px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestFit">Why Branded Wor(l)ds? *</label>
+                        <textarea id="guestFit" name="guestFit" placeholder="Why are you a great fit for our audience?" required></textarea>
+                    </div>
+
+                    <!-- Honeypot — must stay empty -->
+                    <div class="form-group honeypot" aria-hidden="true">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div id="formStatus" class="form-status"></div>
+
+                    <button type="submit" id="applyBtn" class="btn btn-primary form-submit-btn" disabled>
+                        Submit Application
+                    </button>
+                </form>
             </div>
 
             <div class="booking-section" id="book">
@@ -1168,45 +1304,54 @@
             cb.addEventListener('change', updateApplyButton);
         });
 
-        applyBtn.addEventListener('click', function() {
-            if (!this.disabled) {
-                // Simple mailto with pre-filled template
-                const subject = 'Branded Wor(l)ds Guest Application';
-                const body = `Hi Steven and Jeff,
+        // Enable submit button only when all checkboxes are checked
+        checkboxes.forEach(cb => cb.addEventListener('change', updateApplyButton));
 
-I would like to apply to be a guest on Branded Wor(l)ds.
+        const guestForm = document.getElementById('guestForm');
+        const formStatus = document.getElementById('formStatus');
 
-I confirm that I meet all four requirements:
-✓ Transglobal Relevance
-✓ Industry Relevance (Merch, Branding, Advertising)
-✓ English Proficiency
-✓ A Story Worth Telling
+        guestForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-MY NAME:
-[Your Full Name]
+            const btn = document.getElementById('applyBtn');
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            formStatus.style.display = 'none';
 
-MY COMPANY:
-[Your Company]
+            const payload = {
+                guestName:    document.getElementById('guestName').value.trim(),
+                guestEmail:   document.getElementById('guestEmail').value.trim(),
+                guestCompany: document.getElementById('guestCompany').value.trim(),
+                guestRole:    document.getElementById('guestRole').value.trim(),
+                guestBio:     document.getElementById('guestBio').value.trim(),
+                guestStory:   document.getElementById('guestStory').value.trim(),
+                guestFit:     document.getElementById('guestFit').value.trim(),
+                website:      document.getElementById('website').value,
+            };
 
-MY BIO:
-[Please write a brief bio about yourself]
+            try {
+                const res = await fetch('/api/apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
 
-MY STORY:
-[Please describe the story you'd like to share on the podcast]
-
-WHY I'M A GOOD FIT:
-[Please explain why you'd be a great guest for Branded Wor(l)ds]
-
-MY CONTACT:
-Email: [Your Email]
-Phone: [Your Phone]
-LinkedIn: [Your LinkedIn]
-
-Looking forward to hearing from you!
-
-Best regards`;
-                
-                window.location.href = `mailto:sb@mycybergroup.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                if (res.ok) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Thank you — your application has been received. We\'ll be in touch shortly.';
+                    formStatus.style.display = 'block';
+                    guestForm.reset();
+                    btn.textContent = 'Application Sent';
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Something went wrong. Please try again or reach out to us directly.';
+                formStatus.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Submit Application';
+                updateApplyButton();
             }
         });
 
